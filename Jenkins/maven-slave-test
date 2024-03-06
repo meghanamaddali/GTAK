@@ -1,0 +1,13 @@
+Building your first pipeline to verify the connection btw jenkins-master and maven-slave are proper. 
+
+1. Jenkins dashboard --> freestyle project --> Name: maven-slave-test --> ok
+2. General --> Restrict where this project can run --> Lables --> maven 
+3. Build Steps --> Execute shell --> echo "Hello there! I am maven-slave here." >> /home/ubuntu/maven.txt --> Save 
+4. Buils now 
+5. In Console output you can see success. 
+
+To verify login to your jenkins-slave server 
+    cd /home/ubuntu/ 
+    ls (u will find maven.txt)
+    cat maven.txt (u can see the what ever you wrote in build steps.)
+    

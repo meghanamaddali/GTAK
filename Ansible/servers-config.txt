@@ -1,0 +1,71 @@
+###########Ansible#############
+
+-> ssh command
+        ssh -i "project_gtak.pem" ubuntu@3.84.78.28
+
+-> copying of pem file command
+        scp -i /Users/meghanamaddali/Downloads/project_gtak.pem /Users/meghanamaddali/Downloads/project_gtak.pem ubuntu@ec2-3-84-78-28.compute-1.amazonaws.com:/opt
+
+-> read only access for pem file 
+        chmod 400 project_gtak.pem
+
+-> testing connection (checking if jenkins servers are connected to ansible or not)
+        ansible -i hosts all -m ping
+
+-> cretate a yaml file for jenkin-master to install and run the tools you want in /opt dir 
+        sudo vi jenkins-master-setip.yml 
+        
+-> dry running the ansible p is working properly or not 
+        ansible-playbook -i /opt/hosts jenkins-master-setup.yml --check
+
+-> Run the ansible-playbook for jenkin-master
+        ansible-playbook -i /opt/hosts jenkins-master-setup.yml
+
+-> cretate a yaml file for jenkin-Slave to install and run the tools you want in /opt dir 
+        sudo vi jenkins-slave-setup.yml 
+        
+-> dry running the ansible p is working properly or not 
+        ansible-playbook -i /opt/hosts jenkins-slave-setup.yml --check
+
+-> Run the ansible-playbook for jenkin-slave
+        ansible-playbook -i /opt/hosts jenkins-slave-setup.yml
+
+
+###########Jenkins-Master#############
+
+-> ssh command
+        ssh -i "project_gtak.pem" ubuntu@34.229.248.52
+
+-> to change the hostname of this file follow these commands 
+   1. hostname
+   2. sudo vi /etc/hostname
+        change the hostname in this file and save and exit
+   3. sudo vi /etc/hosts
+        add the hostname next to the localhost, save and exit
+   4. now yoy need to reboot your server 
+        sudo reboot and wait for 5 mins and when you login you can see your hostname changed
+
+-> check if all the packsges are install by ansible-playbook or not 
+        java --version
+        service jenkins status 
+-> Now as you see jenkins is running we need to be able to get into jenkins portal 
+        http://34.229.248.52:8080/
+        get your jenkins password through 
+            sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+        
+
+###########Jenkins-Slave#############
+-> ssh command 
+        ssh -i "project_gtak.pem" ubuntu@52.91.47.77
+    
+-> check for java version
+        java --version
+
+-> check if maven is installed or not 
+        if you directly check mvn verion you may not get it but 
+        go into /opt and you will find apache-maven installed 
+
+
+
+After all these installations and configurations the next step is to build pipelines in Jenkins. 
+Head to the Jenkins folder for further steps. 

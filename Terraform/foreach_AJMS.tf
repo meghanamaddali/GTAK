@@ -5,7 +5,7 @@ resource "aws_instance" "project-gtak" {
   vpc_security_group_ids = [aws_security_group.gtak-sg.id]
   subnet_id = aws_subnet.gtak-public-subnet-01.id
 
-  for_each = toset(["jenkins-master", "jenikns-slave", "ansible"])
+  for_each = toset(["jenkins-master", "jenkins-slave", "ansible"])
   tags = {
     Name = "${each.key}"
   }
